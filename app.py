@@ -34,5 +34,23 @@ def analyse_cell(frame, index_row, index_col):
     
     return number_neighbors_alive
 
+def next_state_matrix(frame):
+    
+    rows, cols = frame.shape 
+    next_frame = frame.copy()  
 
+    for row in range(rows):
+        for col in range(cols): 
+            alive_neighbors = analyse_cell(frame, row, col)
+            
+            
+            if frame[row][col] == 0 and alive_neighbors == 3:
+                next_frame[row][col] = 1  
+            elif frame[row][col] == 1 and alive_neighbors in [2, 3]:
+                next_frame[row][col] = 1  
+            else:
+                next_frame[row][col] = 0  
+    
+    return next_frame
+          
 
